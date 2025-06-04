@@ -10,7 +10,7 @@ export const getPokedex = async ({
   pageSize = DEFAULT_PAGE_SIZE
 }: RequestOptions = {}): Promise<PokedexResponse> => {
   const offset = getRequestOffset({ pageNumber, pageSize })
-  const { data } = await axios.get<PokedexResponse>(`/pokemon?limit=${pageSize}&offset=${offset}`);
+  const { data } = await axios.get<PokedexResponse>(`/pokemon-species?limit=${pageSize}&offset=${offset}`);
 
   return data
 }
