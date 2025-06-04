@@ -1,8 +1,16 @@
 import type { PokemonInfo, PokedexResponse } from "@/types/pokemon";
+import type { RequestOptions } from "@/types/requests";
+import { getRequestOffset } from "@/utils/axios";
 import axios from "axios"
 
-export const getPokedex = async (): Promise<PokedexResponse> => {
-  const { data } = await axios.get<PokedexResponse>('/pokemon');
+export const DEFAULT_PAGE_SIZE = 20;
+
+export const getPokedex = async ({
+  pageNumber = 1,
+  pageSize = DEFAULT_PAGE_SIZE
+}: RequestOptions = {}): Promise<PokedexResponse> => {
+  const offset = getRequestOffset({ pageNumber, pageSize })
+  const { data } = await axios.get<PokedexResponse>(`/pokemon?limit=${pageSize}&offset=${offset}`);
 
   return data
 }

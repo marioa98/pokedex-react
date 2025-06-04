@@ -1,17 +1,24 @@
 import Spinner from "@/components/Spinner/Spinner";
 import usePokedex from "@/hooks/usePokedex";
 import { Flex } from "antd";
-import type { FunctionComponent } from "react";
+import { useEffect, useRef, type FunctionComponent } from "react";
 import PokemonCard from "@/components/PokemonCard/PokemonCard";
+import { useInView } from "react-intersection-observer";
 
 const Landing: FunctionComponent = () => {
+  const { ref, inView } = useInView()
   const {
-    data: {
-      results
-    } = {},
-    isLoading
+    data,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage
   } = usePokedex()
-  
+
+  useEffect(() => {
+    if (inView) fetchNextPage()
+  }, [inView])
+
+
   if (isLoading) return <Spinner />
 
   return (
@@ -21,12 +28,21 @@ const Landing: FunctionComponent = () => {
       justify="center"
       align="center"
     >
-      {!!results?.length && results.map((pokemon) => {
-        const key = `pokemon-card-${pokemon.name}`
+      {data?.pages.map(({ results }) => {
         return (
-          <PokemonCard key={key} data={pokemon} />
+          <>
+            {results.map((pokemon) => {
+              const key = `pokemon-card-${pokemon.name}`
+              return (
+                <PokemonCard key={key} data={pokemon} />
+              )
+            })}
+          </>
         )
-      })}
+      })
+      }
+      {isFetchingNextPage && <Spinner />}
+      <div style={{ width: '100vw', height: '1vh' }} ref={ref} />
     </Flex>
   )
 }
