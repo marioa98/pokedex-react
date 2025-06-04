@@ -1,0 +1,13 @@
+.card {
+  width: 300px;
+
+  .sprite {
+    background-color: #F2F2F2;
+  }
+
+  .title {
+    :global .ant-card-meta-title {
+      text-transform: capitalize;
+    }
+  }
+}

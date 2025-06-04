@@ -1,9 +1,11 @@
-import AppRouter from "./routes/AppRouter"
-import Routes from "./routes/AppRouter"
+import { Route, Routes } from "react-router-dom"
+import Landing from "./pages/Landing/Landing"
 
 function App() {
   return (
-    <AppRouter />
+    <Routes>
+      <Route index element={<Landing />} />
+    </Routes>
   )
 }
 
