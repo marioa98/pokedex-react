@@ -4,7 +4,7 @@ import { Descriptions, Flex, Image, Typography } from "antd";
 import type { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 import styles from './pokemonDetails.module.scss'
-import { getAbilitiesFormatted, getHeightFormat, getLocalizedGenus, getWeightFormat } from "@/utils/pokemon";
+import { getAbilitiesFormatted, getHeightFormat, getLocalizedDescription, getLocalizedGenus, getWeightFormat } from "@/utils/pokemon";
 
 const { Title } = Typography
 
@@ -49,7 +49,7 @@ const PokemonDetails: FunctionComponent = () => {
           column={4}
         >
           <Descriptions.Item span={4} label="About">
-            {data.flavor_text_entries[0].flavor_text}
+            {getLocalizedDescription(data.flavor_text_entries)}
           </Descriptions.Item>
 
           <Descriptions.Item label="Height" span={2}>
