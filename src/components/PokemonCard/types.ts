@@ -1,5 +1,5 @@
-import type { PokedexResult } from "@/types/pokemon";
+import type { PokemonExternalResource } from "@/types/pokemon";
 
 export interface PokemonCardProps {
-  data: PokedexResult;
+  data: PokemonExternalResource;
 }

@@ -1,0 +1,5 @@
+$viewport-width: 1920px;
+
+@function pxToVw($value) {
+  @return calc($value / $viewport-width) * 100 * 1vw;
+}

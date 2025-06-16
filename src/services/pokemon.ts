@@ -1,4 +1,4 @@
-import type { PokemonInfo, PokedexResponse } from "@/types/pokemon";
+import type { PokemonInfo, PokedexResponse, PokemonSpecieInfo } from "@/types/pokemon";
 import type { RequestOptions } from "@/types/requests";
 import { getRequestOffset } from "@/utils/axios";
 import axios from "axios"
@@ -15,8 +15,17 @@ export const getPokedex = async ({
   return data
 }
 
-export const getPokemonByName = async (name: string): Promise<PokemonInfo> => {
-  const { data } = await axios.get<PokemonInfo>(`/pokemon/${name}`);
+export const getPokemonByName = async (name: string): Promise<PokemonInfo & PokemonSpecieInfo> => {
+  const [
+    { data: pokemonInfo },
+    { data: pokemonSpecie }
+  ] = await Promise.all([
+    axios.get<PokemonInfo>(`/pokemon/${name}`),
+    axios.get<PokemonSpecieInfo>(`/pokemon-species/${name}`)
+  ]);
 
-  return data;
+  return {
+    ...pokemonInfo,
+    ...pokemonSpecie
+  };
 }

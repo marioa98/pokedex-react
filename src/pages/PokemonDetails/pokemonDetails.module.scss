@@ -1,0 +1,16 @@
+@use "../../styles/variables.scss" as *;
+@use "../../styles/functions.scss" as *;
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.sprite {
+  &:global(.ant-image-img) {
+    background-color: $background-color;
+    border-radius: pxToVw(8px);
+    width: pxToVw(450px);
+  }
+}

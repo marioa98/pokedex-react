@@ -1,7 +1,9 @@
 interface AppRoutes {
   root: string;
+  pokemonByName: string;
 }
 
 export const routes: AppRoutes = {
-  root: '/'
+  root: '/',
+  pokemonByName: '/pokemon/:pokemonName'
 }
