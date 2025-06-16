@@ -1,0 +1,87 @@
+@use "../../styles/variables.scss" as *;
+@use "../../styles/functions.scss" as *;
+
+.container {
+  text-transform: capitalize;
+  color: #fff;
+
+  &.bug {
+    background-color: $bg-bug;
+  }
+
+  &.dark {
+    background-color: $bg-dark;
+  }
+
+  &.dragon {
+    background: $bg-dragon;
+  }
+
+  &.electric {
+    background-color: $bg-electric;
+    color: #212121;
+  }
+
+  &.fairy {
+    background-color: $bg-fairy;
+    color: #212121;
+  }
+
+  &.fighting {
+    background-color: $bg-fighting;
+  }
+
+  &.fire {
+    background-color: $bg-fire;
+  }
+
+  &.flying {
+    background: $bg-flying;
+    color: #212121;
+  }
+
+  &.ghost {
+    background-color: $bg-ghost;
+  }
+
+  &.grass {
+    background-color: $bg-grass;
+    color: #212121;
+  }
+
+  &.ground {
+    background: $bg-ground;
+    color: #212121;
+  }
+
+  &.ice {
+    background-color: $bg-ice;
+    color: #212121;
+  }
+
+  &.normal {
+    background-color: $bg-normal;
+    color: #212121;
+  }
+
+  &.poison {
+    background-color: $bg-poison;
+  }
+
+  &.psychic {
+    background-color: $bg-psychic;
+  }
+
+  &.rock {
+    background-color: $bg-rock;
+  }
+
+  &.steel {
+    background-color: $bg-steel;
+    color: #212121;
+  }
+
+  &.water {
+    background-color: $bg-water;
+  }
+}

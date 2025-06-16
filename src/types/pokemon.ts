@@ -20,7 +20,7 @@ interface PokemonName {
   language: PokemonExternalResource;
 }
 
-interface FlavorTextEntry {
+export interface FlavorTextEntry {
   flavor_text: string;
   language: PokemonExternalResource;
   version: PokemonExternalResource;
@@ -73,9 +73,12 @@ interface PokemonSprite {
   front_shiny_female: string;
 }
 
-interface PokemonType {
+export type PokemonType =
+  'normal' | 'fighting' | 'flying' | 'poison' | 'ground' | 'rock' | 'bug' | 'ghost' | 'steel' | 'fire' | 'water' | 'grass' | 'electric' | 'psychic' | 'ice' | 'dragon' | 'dark' | 'fairy' | 'stellar' | 'unknown'
+
+export interface PokemonTypeInfo {
   slot: number;
-  type: PokemonExternalResource;
+  type: { name: PokemonType } & PokemonExternalResource;
 }
 
 export interface PokemonInfo {
@@ -98,7 +101,7 @@ export interface PokemonInfo {
   past_types: unknown[];
   species: PokemonExternalResource;
   sprites: PokemonSprite;
-  types: PokemonType[];
+  types: PokemonTypeInfo[];
   weight: number;
 }
 
