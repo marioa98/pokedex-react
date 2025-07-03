@@ -1,7 +1,8 @@
 @use '../../styles/variables.scss' as *;
+@use '../../styles/functions.scss' as *;
 
 .card {
-  width: 300px;
+  width: pxToVw(300px);
 
   .sprite {
     background-color: $background-color;

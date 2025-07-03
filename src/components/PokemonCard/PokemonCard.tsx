@@ -5,13 +5,15 @@ import styles from './pokemonCard.module.scss'
 import usePokemon from "@/hooks/usePokemon";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/routes/routes";
+import PokemonTypeBadge from "../PokemonTypeBadge/PokemonTypeBadge";
+import { getPokemonCardImg } from "@/utils/image";
 
 const PokemonCard: FunctionComponent<PokemonCardProps> = ({ data }) => {
   const {
     data: {
       name,
       id: gameNumber,
-      sprites
+      types
     } = {}
   } = usePokemon(data.name);
   const navigate = useNavigate();
@@ -28,13 +30,24 @@ const PokemonCard: FunctionComponent<PokemonCardProps> = ({ data }) => {
       className={styles.card}
       type="inner"
       cover={
-        <img className={styles.sprite} alt={name} src={sprites?.front_default} />
+        <img
+          className={styles.sprite}
+          alt={name}
+          src={getPokemonCardImg(gameNumber!)}
+        />
       }
       onClick={onCardClick}
     >
       <Card.Meta
         title={`#${formatNumber} - ${name}`}
         className={styles.title}
+        description={
+          <>
+            {types && types.map((typeInfo, index) => (
+              <PokemonTypeBadge key={`${data.name}-type-${index}`} type={typeInfo.type.name} />
+            ))}
+          </>
+        }
       />
     </Card>
   )
