@@ -1,10 +1,9 @@
 import Spinner from "@/components/Spinner/Spinner";
 import usePokemon from "@/hooks/usePokemon";
-import { Descriptions, Flex, Image, Typography } from "antd";
+import { Flex, Typography } from "antd";
 import type { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
-import styles from './pokemonDetails.module.scss'
-import { getAbilitiesFormatted, getHeightFormat, getLocalizedDescription, getLocalizedGenus, getWeightFormat } from "@/utils/pokemon";
+import PokemonDashboard from "@/components/PokemonDashboard/PokemonDashboard";
 
 const { Title } = Typography
 
@@ -29,52 +28,7 @@ const PokemonDetails: FunctionComponent = () => {
         {/** For some reason, the margin top is different in this component. TODO: Check it later */}
         <Title style={{ marginTop: '0.67em' }} type='secondary'> - #{String(data.id).padStart(4, '0')}</Title>
       </Flex>
-      <Flex
-        align="middle"
-        justify="center"
-        wrap
-        gap="small"
-        className={styles.pokemonContainer}
-      >
-        <Image
-          alt={data.name}
-          src={data.sprites.front_default}
-          preview={false}
-          className={styles.sprite}
-        />
-        <Descriptions
-          bordered
-          size="middle"
-          layout="vertical"
-          column={4}
-        >
-          <Descriptions.Item span={4} label="About">
-            {getLocalizedDescription(data.flavor_text_entries)}
-          </Descriptions.Item>
-
-          <Descriptions.Item label="Height" span={2}>
-            {getHeightFormat(data.height)}
-          </Descriptions.Item>
-          <Descriptions.Item label="Weight" span={2}>
-            {getWeightFormat(data.weight)}
-          </Descriptions.Item>
-
-          <Descriptions.Item
-            label="Abilities"
-            style={{ textTransform: 'capitalize'}}
-            span={2}
-          >
-            {getAbilitiesFormatted(data.abilities)}
-          </Descriptions.Item>
-          <Descriptions.Item
-            label="Genus"
-            style={{ textTransform: 'capitalize'}}
-            span={2}
-          >
-            {getLocalizedGenus(data.genera)}
-          </Descriptions.Item>
-        </Descriptions>
-      </Flex>
+      <PokemonDashboard data={data} />
     </Flex>
   )
 }

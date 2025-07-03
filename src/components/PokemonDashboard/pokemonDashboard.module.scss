@@ -1,16 +1,24 @@
 @use "../../styles/variables.scss" as *;
 @use "../../styles/functions.scss" as *;
 
-.title {
-  display: flex;
-  align-items: center;
-  justify-items: center;
-}
-
 .sprite {
   &:global(.ant-image-img) {
     background-color: $background-color;
     border-radius: pxToVw(8px);
     width: pxToVw(450px);
+  }
+}
+
+.info {
+  align-content: center;
+}
+
+.header:global(.ant-typography) {
+  margin: 0;
+}
+
+.typesContainer {
+ span:global(.ant-tag) {
+    margin: 0;
   }
 }
