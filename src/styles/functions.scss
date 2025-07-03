@@ -1,5 +1,10 @@
 $viewport-width: 1920px;
+$viewport-height: 1080px;
 
 @function pxToVw($value) {
   @return calc($value / $viewport-width) * 100 * 1vw;
+}
+
+@function pxToVh($value) {
+  @return calc($value / $viewport-height) * 100 * 1vh;
 }
