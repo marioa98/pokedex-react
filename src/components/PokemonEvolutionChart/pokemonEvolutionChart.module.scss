@@ -1,0 +1,25 @@
+@use "../../styles/functions.scss" as *;
+@use "../../styles/variables.scss" as *;
+
+.evolution-showcase {
+  min-height: pxToVh(400px);
+  min-width: 65%;
+  background-color: $color-black-800;
+  border-radius: pxToVw(24px);
+  padding: pxToVh(24px) pxToVw(24px);
+
+  .title {
+    color: $color-white;
+    margin: pxToVh(12px) 0;
+  }
+
+  .down-arrow {
+    color: $color-white;
+    width: pxToVw(36px);
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

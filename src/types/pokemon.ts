@@ -133,3 +133,39 @@ export interface PokemonSpecieInfo {
   shape: PokemonExternalResource;
   varieties: PokemonVariety[];
 }
+
+export type PokemonFullInfo = PokemonInfo & PokemonSpecieInfo;
+
+// Evolution Chain Types
+
+interface EvolutionDetail {
+  gender: null | number;
+  held_item: null | PokemonExternalResource;
+  item: null | PokemonExternalResource;
+  known_move: null | PokemonExternalResource;
+  known_move_type: null | PokemonExternalResource;
+  location: null | PokemonExternalResource;
+  min_affection: null | number;
+  min_beauty: null | number;
+  min_level: null | number;
+  needs_overworld_rain: boolean;
+  party_species: null | PokemonExternalResource;
+  party_type: null | PokemonExternalResource;
+  relative_physical_stats: null | number;
+  time_of_day: string;
+  trade_species: null | PokemonExternalResource;
+  trigger: PokemonExternalResource;
+  turn_upside_down: boolean;
+}
+
+export interface PokemonEvolutionLine {
+  evolution_details: EvolutionDetail[];
+  evolves_to: PokemonEvolutionLine[];
+  is_baby: boolean;
+  species: PokemonExternalResource;
+}
+export interface PokemonChainData {
+  baby_trigger_item: null | PokemonExternalResource;
+  chain: PokemonEvolutionLine
+  id: number;
+}

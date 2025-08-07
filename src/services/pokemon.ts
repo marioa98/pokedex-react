@@ -1,7 +1,7 @@
-import type { PokemonInfo, PokedexResponse, PokemonSpecieInfo } from "@/types/pokemon";
+import { type PokemonInfo, type PokedexResponse, type PokemonSpecieInfo, type PokemonChainData } from "@/types/pokemon";
 import type { RequestOptions } from "@/types/requests";
 import { getRequestOffset } from "@/utils/axios";
-import axios from "axios"
+import axios, { type AxiosResponse } from "axios"
 
 export const DEFAULT_PAGE_SIZE = 20;
 
@@ -28,4 +28,10 @@ export const getPokemonByName = async (name: string): Promise<PokemonInfo & Poke
     ...pokemonInfo,
     ...pokemonSpecie
   };
+}
+
+export const getPokemonEvolutionChainById = async (id: number, evolutionChainURL?: string): Promise<PokemonChainData> => {
+  const { data } = await axios.get<PokemonChainData>(evolutionChainURL ?? `/evolution-chain/${id}`);
+
+  return data;
 }

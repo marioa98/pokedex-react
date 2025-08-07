@@ -1,0 +1,23 @@
+@use "../../styles/functions.scss" as *;
+@use "../../styles/variables.scss" as *;
+
+.pokemon {
+  cursor: pointer;
+  margin: pxToVh(12px);
+
+  &:hover {
+    scale: 1.05;
+  }
+
+  .sprite {
+    border: solid $background-color;
+    border-radius: 50%;
+  }
+
+  .name {
+    color: $color-white;
+    text-transform: capitalize;
+    text-align: center;
+    margin: pxToVh(12px) 0;
+  }
+}
