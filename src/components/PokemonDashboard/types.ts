@@ -1,5 +1,5 @@
-import type { PokemonInfo, PokemonSpecieInfo } from "@/types/pokemon";
+import type { PokemonFullInfo, PokemonInfo, PokemonSpecieInfo } from "@/types/pokemon";
 
 export interface PokemonDashboardProps {
-  data: PokemonInfo & PokemonSpecieInfo
+  data: PokemonFullInfo
 }

@@ -9,7 +9,7 @@ import styles from "./pokemonAvatar.module.scss";
 
 const { Title } = Typography
 
-const PokemonAvatar: FunctionComponent<PokemonAvatarProps> = ({ pokemon}) => {
+const PokemonAvatar: FunctionComponent<PokemonAvatarProps> = ({ pokemon }) => {
   const navigate = useNavigate()
 
   return (
@@ -22,7 +22,7 @@ const PokemonAvatar: FunctionComponent<PokemonAvatarProps> = ({ pokemon}) => {
         height={150}
         preview={false}
         onClick={() => {
-          navigate(routes.pokemonByName.replace(':pokemonName', pokemon.name))
+          navigate(routes.pokemonByName.replace(':pokemonName', String(pokemon.id)))
         }}
         src={getPokemonCardImg(pokemon.id)}
         className={styles.sprite}

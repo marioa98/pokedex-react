@@ -15,19 +15,15 @@ export const getPokedex = async ({
   return data
 }
 
-export const getPokemonByName = async (name: string): Promise<PokemonInfo & PokemonSpecieInfo> => {
-  const [
-    { data: pokemonInfo },
-    { data: pokemonSpecie }
-  ] = await Promise.all([
-    axios.get<PokemonInfo>(`/pokemon/${name}`),
-    axios.get<PokemonSpecieInfo>(`/pokemon-species/${name}`)
-  ]);
+export const getPokemon = async (url: string): Promise<PokemonInfo> => {
+  const { data } = await axios.get<PokemonInfo>(url);
 
-  return {
-    ...pokemonInfo,
-    ...pokemonSpecie
-  };
+  return data;
+}
+
+export const getPokemonSpecie = async (name?: string): Promise<PokemonSpecieInfo> => {
+  const { data } = await axios.get<PokemonSpecieInfo>(`/pokemon-species/${name}`);
+  return data
 }
 
 export const getPokemonEvolutionChainById = async (id: number, evolutionChainURL?: string): Promise<PokemonChainData> => {

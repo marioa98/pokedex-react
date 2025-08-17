@@ -34,7 +34,7 @@ const Landing: FunctionComponent = () => {
             {results.map((pokemon) => {
               const key = `pokemon-card-${pokemon.name}`
               return (
-                <PokemonCard key={key} data={pokemon} />
+                <PokemonCard key={key} pokemon={pokemon} />
               )
             })}
           </>

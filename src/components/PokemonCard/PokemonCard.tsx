@@ -8,21 +8,21 @@ import { routes } from "@/routes/routes";
 import PokemonTypeBadge from "../PokemonTypeBadge/PokemonTypeBadge";
 import { getPokemonCardImg } from "@/utils/image";
 
-const PokemonCard: FunctionComponent<PokemonCardProps> = ({ data }) => {
-  const {
+const PokemonCard: FunctionComponent<PokemonCardProps> = ({ pokemon }) => {
+  const [{
     data: {
       name,
       id: gameNumber,
       types
     } = {}
-  } = usePokemon(data.name);
+  }] = usePokemon(pokemon.name, { url: pokemon.url });
   const navigate = useNavigate();
 
   const formatNumber = String(gameNumber).padStart(4, '0');
 
   const onCardClick = useCallback(() => {
-    navigate(routes.pokemonByName.replace(':pokemonName', data.name))
-  }, [])
+    navigate(routes.pokemonByName.replace(':pokemonName', String(gameNumber)));
+  }, [gameNumber])
 
   return (
     <Card
@@ -39,12 +39,12 @@ const PokemonCard: FunctionComponent<PokemonCardProps> = ({ data }) => {
       onClick={onCardClick}
     >
       <Card.Meta
-        title={`#${formatNumber} - ${name}`}
+        title={`#${formatNumber} - ${name ?? pokemon.name}`}
         className={styles.title}
         description={
           <>
             {types && types.map((typeInfo, index) => (
-              <PokemonTypeBadge key={`${data.name}-type-${index}`} type={typeInfo.type.name} />
+              <PokemonTypeBadge key={`${pokemon.name}-type-${index}`} type={typeInfo.type.name} />
             ))}
           </>
         }

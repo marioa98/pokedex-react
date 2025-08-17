@@ -4,56 +4,18 @@ import usePokemonChain from "@/hooks/usePokemonChain";
 import { Flex, Typography } from "antd";
 import styles from "./pokemonEvolutionChart.module.scss";
 import type { PokemonEvolutionLine, PokemonFullInfo } from "@/types/pokemon";
-import { getPokemonByName } from "@/services/pokemon";
+import { getPokemon } from "@/services/pokemon";
 import PokemonAvatar from "../PokemonAvatar/PokemonAvatar";
 import { DownOutlined } from "@ant-design/icons";
+import usePokemonEvolution from "@/hooks/usePokemonEvolution";
+import Spinner from "../Spinner/Spinner";
 
 const { Title } = Typography
 
-type EvolutionChain = PokemonFullInfo[] | PokemonFullInfo[][];
-
-const getEvolutionChain = async (
-  data: PokemonEvolutionLine | PokemonEvolutionLine[],
-  prevEvolution: EvolutionChain = []
-): Promise<EvolutionChain> => {
-  let currentPokemonData: PokemonFullInfo[] | PokemonFullInfo;
-
-  if (Array.isArray(data)) {
-    currentPokemonData = await Promise.all(
-      data.map((pokemon) => getPokemonByName(pokemon.species.name))
-    );
-  } else {
-    currentPokemonData = await getPokemonByName(data.species.name);
-  }
-
-
-  const evolutionChain: any = [...prevEvolution, currentPokemonData];
-
-  if (!Array.isArray(data) && data.evolves_to.length) {
-    const nextEvolution = data.evolves_to.length === 1 ? data.evolves_to[0] : data.evolves_to;
-    return await getEvolutionChain(nextEvolution, evolutionChain);
-  }
-
-  return evolutionChain;
-};
-
 const PokemonEvolutionChart: FunctionComponent<PokemonEvolutionChartProps> = ({ evolutionChainURL, id }) => {
-  const { data } = usePokemonChain(id, evolutionChainURL);
-  const [pokemonChain, setPokemonChain] = useState<EvolutionChain>([]);
+  const { isLoading, data: pokemonChain } = usePokemonEvolution(id, evolutionChainURL);
 
-  useEffect(() => {
-    if (!data) return;
-
-    getEvolutionChain(data.chain).
-      then((evolutionChain) => {
-        setPokemonChain(evolutionChain);
-      })
-      .catch((error) => {
-        console.error("Error fetching evolution chain:", error);
-      });
-  }, [data])
-
-  if (!data) return
+  if (isLoading) return <Spinner />
 
   return (
     <Flex justify="center">
