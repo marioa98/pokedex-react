@@ -1,6 +1,6 @@
 import { useCallback, type FunctionComponent } from 'react';
 import type { PokemonCardProps } from './types';
-import { Card } from 'antd';
+import { Card, Flex, Typography } from 'antd';
 import styles from './pokemonCard.module.scss';
 import usePokemon from '@/hooks/usePokemon';
 import { useNavigate } from 'react-router-dom';
@@ -8,11 +8,13 @@ import { routes } from '@/routes/routes';
 import PokemonTypeBadge from '../PokemonTypeBadge/PokemonTypeBadge';
 import { getPokemonCardImg } from '@/utils/image';
 
+const { Title } = Typography;
+
 const PokemonCard: FunctionComponent<PokemonCardProps> = ({ pokemon }) => {
   const [{ data: { name, id: gameNumber, types } = {} }] = usePokemon(
-    pokemon.name,
-    { url: pokemon.url }
+    pokemon.name
   );
+
   const navigate = useNavigate();
 
   const formatNumber = String(gameNumber).padStart(4, '0');
@@ -37,10 +39,14 @@ const PokemonCard: FunctionComponent<PokemonCardProps> = ({ pokemon }) => {
       onClick={onCardClick}
     >
       <Card.Meta
-        title={`#${formatNumber} - ${name ?? pokemon.name}`}
-        className={styles.title}
+        title={
+          <Title
+            className={styles.title}
+            level={5}
+          >{`#${formatNumber} - ${name ?? pokemon.name}`}</Title>
+        }
         description={
-          <>
+          <Flex justify='center'>
             {types &&
               types.map((typeInfo, index) => (
                 <PokemonTypeBadge
@@ -48,7 +54,7 @@ const PokemonCard: FunctionComponent<PokemonCardProps> = ({ pokemon }) => {
                   type={typeInfo.type.name}
                 />
               ))}
-          </>
+          </Flex>
         }
       />
     </Card>
