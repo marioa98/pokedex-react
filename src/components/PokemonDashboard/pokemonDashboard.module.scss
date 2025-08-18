@@ -1,24 +1,40 @@
 @use '../../styles/variables.scss' as *;
 @use '../../styles/functions.scss' as *;
 
+:global(.ant-image) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:global(.ant-select-selector) {
+  background-color: green;
+}
+
 .sprite {
   &:global(.ant-image-img) {
     background-color: $background-color;
-    border-radius: pxToVw(8px);
-    width: pxToVw(450px);
+    border-radius: pxToVw(24px);
+    width: auto;
+
+    @media (max-width: 820px) {
+      width: 80%;
+    }
   }
 }
 
-.info {
-  align-content: center;
-}
+.info-dashboard {
+  width: 40%;
 
-.header:global(.ant-typography) {
-  margin: 0;
-}
+  @media (max-width: $mobile-breakpoint) {
+    width: 90%;
+  }
 
-.typesContainer {
-  span:global(.ant-tag) {
-    margin: 0;
+  @media (max-width: $tablet-breakpoint) and (min-width: $mobile-breakpoint) {
+    width: 70%;
+  }
+
+  .info {
+    align-content: center;
   }
 }

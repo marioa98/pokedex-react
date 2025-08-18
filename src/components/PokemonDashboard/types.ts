@@ -1,5 +1,7 @@
-import type { PokemonFullInfo } from '@/types/pokemon';
+import type { PokemonInfo, PokemonSpecieInfo } from '@/types/pokemon';
 
 export interface PokemonDashboardProps {
-  data: PokemonFullInfo;
+  pokemonInfo: PokemonInfo;
+  pokemonSpecie: PokemonSpecieInfo;
+  onVariantSelect?: (item: string) => void;
 }

@@ -30,7 +30,7 @@ const PokemonEvolutionChart: FunctionComponent<PokemonEvolutionChartProps> = ({
           {pokemonChain.map((pokemon, chainIndex) => (
             <>
               {Array.isArray(pokemon) ? (
-                <Flex key={`pokemon-multiple-line-${chainIndex}`}>
+                <Flex key={`pokemon-multiple-line-${chainIndex}`} className={styles['evolution-link']}>
                   {pokemon.map((evolution, subIndex) => (
                     <PokemonAvatar
                       key={`pokemon-evolution-${evolution.name}-${subIndex}`}

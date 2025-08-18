@@ -8,6 +8,16 @@
   border-radius: pxToVw(24px);
   padding: pxToVh(24px) pxToVw(24px);
 
+  @media (max-width: $desktop-breakpoint) {
+    width: 85%;
+  }
+
+  .evolution-link {
+    @media (max-width: $desktop-breakpoint) {
+      flex-direction: column;
+    }
+  }
+
   .title {
     color: $color-white;
     margin: pxToVh(12px) 0;
@@ -15,7 +25,7 @@
 
   .down-arrow {
     color: $color-white;
-    width: pxToVw(36px);
+    width: 32px;
 
     svg {
       width: 100%;

@@ -36,7 +36,7 @@ export interface PokemonGenera {
   language: PokemonExternalResource;
 }
 
-interface PokemonVariety {
+export interface PokemonVariety {
   is_default: boolean;
   pokemon: PokemonExternalResource;
 }
@@ -62,6 +62,12 @@ interface PokemonMove {
   }[];
 }
 
+interface PokemonSpriteArtworks {
+  front_default: string;
+  front_shiny?: string;
+  front_female?: string;
+  front_shiny_female?: string;
+}
 interface PokemonSprite {
   back_default: string;
   back_female: string;
@@ -71,6 +77,12 @@ interface PokemonSprite {
   front_female: string;
   front_shiny: string;
   front_shiny_female: string;
+  other: {
+    dream_world: PokemonSpriteArtworks;
+    home: PokemonSpriteArtworks;
+    'official-artwork': PokemonSpriteArtworks;
+    showdowns: PokemonSpriteArtworks;
+  }
 }
 
 export type PokemonType =
