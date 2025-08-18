@@ -33,7 +33,7 @@ interface FormDescription {
 
 export interface PokemonGenera {
   genus: string;
-  language: PokemonExternalResource
+  language: PokemonExternalResource;
 }
 
 interface PokemonVariety {
@@ -58,8 +58,8 @@ interface PokemonMove {
     level_learned_at: number;
     move_learn_method: PokemonExternalResource;
     order: null;
-    version: PokemonExternalResource
-  }[]
+    version: PokemonExternalResource;
+  }[];
 }
 
 interface PokemonSprite {
@@ -74,7 +74,26 @@ interface PokemonSprite {
 }
 
 export type PokemonType =
-  'normal' | 'fighting' | 'flying' | 'poison' | 'ground' | 'rock' | 'bug' | 'ghost' | 'steel' | 'fire' | 'water' | 'grass' | 'electric' | 'psychic' | 'ice' | 'dragon' | 'dark' | 'fairy' | 'stellar' | 'unknown'
+  | 'normal'
+  | 'fighting'
+  | 'flying'
+  | 'poison'
+  | 'ground'
+  | 'rock'
+  | 'bug'
+  | 'ghost'
+  | 'steel'
+  | 'fire'
+  | 'water'
+  | 'grass'
+  | 'electric'
+  | 'psychic'
+  | 'ice'
+  | 'dragon'
+  | 'dark'
+  | 'fairy'
+  | 'stellar'
+  | 'unknown';
 
 export interface PokemonTypeInfo {
   slot: number;
@@ -113,7 +132,7 @@ export interface PokemonSpecieInfo {
   evolution_chain: PokemonExternalResource;
   evolves_from_species: PokemonExternalResource;
   flavor_text_entries: FlavorTextEntry[];
-  form_descriptions: FormDescription[]
+  form_descriptions: FormDescription[];
   forms_switchable: boolean;
   gender_rate: number;
   genera: PokemonGenera[];
@@ -166,6 +185,6 @@ export interface PokemonEvolutionLine {
 }
 export interface PokemonChainData {
   baby_trigger_item: null | PokemonExternalResource;
-  chain: PokemonEvolutionLine
+  chain: PokemonEvolutionLine;
   id: number;
 }

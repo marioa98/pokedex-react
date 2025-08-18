@@ -5,5 +5,5 @@ interface AppRoutes {
 
 export const routes: AppRoutes = {
   root: '/',
-  pokemonByName: '/pokemon/:pokemonName'
-}
+  pokemonByName: '/pokemon/:pokemonName',
+};

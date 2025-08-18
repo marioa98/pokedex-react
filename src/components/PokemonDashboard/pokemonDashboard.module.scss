@@ -1,5 +1,5 @@
-@use "../../styles/variables.scss" as *;
-@use "../../styles/functions.scss" as *;
+@use '../../styles/variables.scss' as *;
+@use '../../styles/functions.scss' as *;
 
 .sprite {
   &:global(.ant-image-img) {
@@ -18,7 +18,7 @@
 }
 
 .typesContainer {
- span:global(.ant-tag) {
+  span:global(.ant-tag) {
     margin: 0;
   }
 }

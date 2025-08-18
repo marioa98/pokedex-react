@@ -1,4 +1,4 @@
-import type { PokemonType } from "@/types/pokemon";
+import type { PokemonType } from '@/types/pokemon';
 
 export interface PokemonTypeBadgeProps {
   type: PokemonType;
