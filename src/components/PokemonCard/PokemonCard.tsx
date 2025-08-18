@@ -6,13 +6,13 @@ import usePokemon from '@/hooks/usePokemon';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '@/routes/routes';
 import PokemonTypeBadge from '../PokemonTypeBadge/PokemonTypeBadge';
-import { getPokemonCardImg } from '@/utils/image';
 
 const { Title } = Typography;
 
 const PokemonCard: FunctionComponent<PokemonCardProps> = ({ pokemon }) => {
-  const [{ data: { name, id: gameNumber, types } = {} }] = usePokemon(
-    pokemon.name
+  const [{ data: { name, id: gameNumber, types, sprites } = {} }] = usePokemon(
+    pokemon.name,
+    { url: pokemon.url }
   );
 
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const PokemonCard: FunctionComponent<PokemonCardProps> = ({ pokemon }) => {
         <img
           className={styles.sprite}
           alt={name}
-          src={getPokemonCardImg(gameNumber!)}
+          src={sprites?.other['official-artwork'].front_default}
         />
       }
       onClick={onCardClick}
