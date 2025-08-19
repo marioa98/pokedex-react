@@ -1,0 +1,25 @@
+@use '../../styles/functions.scss' as *;
+@use '../../styles/variables.scss' as *;
+
+$background-color: #313131;
+
+.search-bar-container {
+  width: pxToVw(1920px);
+  height: pxToVh(100px);
+  background-color: $background-color;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+
+  .search-bar {
+    width: 60%;
+
+    @media (max-width: $mobile-breakpoint) {
+      width: 80%;
+    }
+
+    @media (max-width: $tablet-breakpoint) and (min-width: $mobile-breakpoint) {
+      width: 75%;
+    }
+  }
+}
