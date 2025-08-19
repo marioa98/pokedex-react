@@ -13,7 +13,7 @@ export const DEFAULT_PAGE_SIZE = 20;
 export const getPokedex = async ({
   pageNumber = 1,
   pageSize = DEFAULT_PAGE_SIZE,
-  offset: customOffset
+  offset: customOffset,
 }: RequestOptions = {}): Promise<PokedexResponse> => {
   const offset = customOffset ?? getRequestOffset({ pageNumber, pageSize });
   const { data } = await axios.get<PokedexResponse>(
@@ -29,8 +29,13 @@ export const getPokemon = async (url: string): Promise<PokemonInfo> => {
   return data;
 };
 
-export const getAllSpecies = async ({ pageNumber = 1, pageSize = DEFAULT_PAGE_SIZE }: RequestOptions = {}): Promise<PokedexResponse> => {
-  const { data } = await axios.get<PokedexResponse>(`/pokemon-species?limit=${pageSize}&offset=${getRequestOffset({ pageNumber, pageSize })}`);
+export const getAllSpecies = async ({
+  pageNumber = 1,
+  pageSize = DEFAULT_PAGE_SIZE,
+}: RequestOptions = {}): Promise<PokedexResponse> => {
+  const { data } = await axios.get<PokedexResponse>(
+    `/pokemon-species?limit=${pageSize}&offset=${getRequestOffset({ pageNumber, pageSize })}`
+  );
 
   return data;
 };

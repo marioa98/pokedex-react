@@ -82,7 +82,7 @@ interface PokemonSprite {
     home: PokemonSpriteArtworks;
     'official-artwork': PokemonSpriteArtworks;
     showdowns: PokemonSpriteArtworks;
-  }
+  };
 }
 
 export type PokemonType =
