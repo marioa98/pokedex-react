@@ -29,7 +29,7 @@ const PokemonContextProvider: FunctionComponent<PropsWithChildren> = ({
     try {
       const { results, count } = await getAllSpecies({
         params: {
-          limit: 2000, // Currently 1,025 pokemon known.
+          limit: POKEMON_SPECIES_FETCH_LIMIT,
         },
       });
 
