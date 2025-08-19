@@ -1,7 +1,6 @@
 import type { FunctionComponent } from 'react';
 import type { PokemonDashboardProps } from './types';
-import { Descriptions, Flex, Image } from 'antd';
-import { getPokemonDetailImg } from '@/utils/image';
+import { Descriptions, Flex, Image, Select } from 'antd';
 import PokemonTypeBadge from '../PokemonTypeBadge/PokemonTypeBadge';
 import {
   getAbilitiesFormatted,
@@ -12,29 +11,50 @@ import {
 } from '@/utils/pokemon';
 import styles from './pokemonDashboard.module.scss';
 
+const formatPokemonVariantName = (name: string): string => {
+  return name.replace('-', ' ').replace(/\b\w/g, (char) => char.toUpperCase());
+};
+
 const PokemonDashboard: FunctionComponent<PokemonDashboardProps> = ({
-  data,
+  pokemonInfo,
+  pokemonSpecie,
+  onVariantSelect,
 }) => {
-  const {
-    abilities,
-    flavor_text_entries,
-    genera,
-    height,
-    id,
-    name,
-    types,
-    weight,
-  } = data;
+  const { abilities, height, name, types, weight, sprites } = pokemonInfo;
+
+  const { varieties, flavor_text_entries, genera } = pokemonSpecie;
 
   return (
-    <Flex align='middle' justify='center' wrap gap='middle'>
+    <Flex align='center' justify='center' wrap gap='large'>
       <Image
         alt={name}
-        src={getPokemonDetailImg(id)}
+        src={sprites.other['official-artwork'].front_default}
         preview={false}
         className={styles.sprite}
       />
-      <Flex gap='small' wrap justify='center' vertical>
+      <Flex
+        gap='small'
+        wrap
+        justify='center'
+        vertical
+        className={styles['info-dashboard']}
+      >
+        {varieties.length > 1 && (
+          <Select
+            className={styles['variants-list']}
+            defaultValue={formatPokemonVariantName(
+              varieties.find((variant) => variant.is_default)?.pokemon.name ??
+                ''
+            )}
+            onSelect={onVariantSelect}
+          >
+            {varieties.map(({ pokemon: pokemonVariant }) => (
+              <Select.Option key={pokemonVariant.name}>
+                {formatPokemonVariantName(pokemonVariant.name)}
+              </Select.Option>
+            ))}
+          </Select>
+        )}
         <Descriptions
           bordered
           size='middle'

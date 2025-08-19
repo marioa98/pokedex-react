@@ -2,15 +2,15 @@
 @use '../../styles/functions.scss' as *;
 
 .card {
-  width: pxToVw(300px);
+  width: 300px;
 
   .sprite {
     background-color: $background-color;
   }
 
   .title {
-    :global .ant-card-meta-title {
-      text-transform: capitalize;
-    }
+    text-transform: capitalize;
+    margin: 0;
+    text-align: center;
   }
 }
