@@ -17,6 +17,7 @@ const defaultValue: PokemonContextProps = {
   pokemonList: [],
 };
 
+export const POKEMON_SPECIES_FETCH_LIMIT = 2000; // Only 1025 pokemon are known, but we fetch more for future-proofing
 const PokemonContext = createContext<PokemonContextProps>(defaultValue);
 
 const PokemonContextProvider: FunctionComponent<PropsWithChildren> = ({
