@@ -4,6 +4,7 @@ import { Flex } from 'antd';
 import { useEffect, type FunctionComponent } from 'react';
 import PokemonCard from '@/components/PokemonCard/PokemonCard';
 import { useInView } from 'react-intersection-observer';
+import styles from './landing.module.scss';
 
 const Landing: FunctionComponent = () => {
   const { ref, inView } = useInView();
@@ -17,7 +18,13 @@ const Landing: FunctionComponent = () => {
   if (isLoading) return <Spinner />;
 
   return (
-    <Flex wrap gap='large' justify='center' align='center'>
+    <Flex
+      wrap
+      gap='large'
+      justify='center'
+      align='center'
+      className={styles['pokemon-list']}
+    >
       {data?.pages.map(({ results }) => {
         return (
           <>
