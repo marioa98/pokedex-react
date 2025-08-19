@@ -1,6 +1,6 @@
+import { usePokemonContext } from '@/context/PokemonContext/PokemonContext';
 import {
   DEFAULT_PAGE_SIZE,
-  getAllSpecies,
   getPokedex,
 } from '@/services/pokemon';
 import type { PokedexResponse } from '@/types/pokemon';
@@ -26,7 +26,7 @@ const getPageSize = (
 const usePokedex = (): UseInfiniteQueryResult<
   InfiniteData<PokedexResponse>
 > => {
-  const [totalSpecies, setTotalSpecies] = useState<number>(-1);
+  const { total: totalSpecies } = usePokemonContext()
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const response = useInfiniteQuery({
@@ -51,11 +51,8 @@ const usePokedex = (): UseInfiniteQueryResult<
   });
 
   useEffect(() => {
-    getAllSpecies().then((species) => {
-      setTotalSpecies(species.count);
-      setTotalPages(Math.ceil(species.count / DEFAULT_PAGE_SIZE));
-    });
-  }, []);
+    setTotalPages(Math.ceil(totalSpecies / DEFAULT_PAGE_SIZE));
+  }, [totalSpecies]);
 
   return response;
 };
