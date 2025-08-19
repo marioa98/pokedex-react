@@ -10,7 +10,7 @@ import PokemonTypeBadge from '../PokemonTypeBadge/PokemonTypeBadge';
 const { Title } = Typography;
 
 const PokemonCard: FunctionComponent<PokemonCardProps> = ({ pokemon }) => {
-  const [{ data: { name, id: gameNumber, types, sprites } = {} }] = usePokemon(
+  const { data: { id: gameNumber, types, species, sprites } = {} } = usePokemon(
     pokemon.name,
     { url: pokemon.url }
   );
@@ -20,7 +20,7 @@ const PokemonCard: FunctionComponent<PokemonCardProps> = ({ pokemon }) => {
   const formatNumber = String(gameNumber).padStart(4, '0');
 
   const onCardClick = useCallback(() => {
-    navigate(routes.pokemonByName.replace(':pokemonName', String(gameNumber)));
+    navigate(routes.pokemonByName.replace(':pokemonName', pokemon.name));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameNumber]);
 
@@ -32,7 +32,7 @@ const PokemonCard: FunctionComponent<PokemonCardProps> = ({ pokemon }) => {
       cover={
         <img
           className={styles.sprite}
-          alt={name}
+          alt={species?.name}
           src={sprites?.other['official-artwork'].front_default}
         />
       }
@@ -43,7 +43,7 @@ const PokemonCard: FunctionComponent<PokemonCardProps> = ({ pokemon }) => {
           <Title
             className={styles.title}
             level={5}
-          >{`#${formatNumber} - ${name ?? pokemon.name}`}</Title>
+          >{`#${formatNumber} - ${species?.name ?? pokemon.name}`}</Title>
         }
         description={
           <Flex justify='center'>

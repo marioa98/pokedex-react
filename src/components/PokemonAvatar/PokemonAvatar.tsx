@@ -19,9 +19,7 @@ const PokemonAvatar: FunctionComponent<PokemonAvatarProps> = ({ pokemon }) => {
         height={150}
         preview={false}
         onClick={() => {
-          navigate(
-            routes.pokemonByName.replace(':pokemonName', String(pokemon.id))
-          );
+          navigate(routes.pokemonByName.replace(':pokemonName', pokemon.name));
         }}
         src={getPokemonCardImg(pokemon.id)}
         className={styles.sprite}

@@ -1,7 +1,7 @@
 import PokemonDashboard from '@/components/PokemonDashboard/PokemonDashboard';
 import PokemonEvolutionChart from '@/components/PokemonEvolutionChart/PokemonEvolutionChart';
 import Spinner from '@/components/Spinner/Spinner';
-import usePokemon from '@/hooks/usePokemon';
+import usePokemon, { usePokemonSpecie } from '@/hooks/usePokemon';
 import { getPokemon } from '@/services/pokemon';
 import type { PokemonInfo } from '@/types/pokemon';
 import { Flex, Typography } from 'antd';
@@ -14,10 +14,15 @@ const PokemonDetails: FunctionComponent = () => {
   const { pokemonName = '' } = useParams();
   const [pokemonVariant, setPokemonVariant] = useState<PokemonInfo>();
 
-  const [
-    { data: pokemonBase, ...pokemonInfoResponse },
-    { data: pokemonSpecie, ...pokemonSpecieResponse },
-  ] = usePokemon(pokemonName);
+  const { data: pokemonSpecie, isLoading: isPokemonSpecieLoading } =
+    usePokemonSpecie(pokemonName);
+  const { data: pokemonBase, isLoading: isPokemonInfoLoading } = usePokemon(
+    pokemonName,
+    {
+      url: `/pokemon/${pokemonSpecie?.id}`,
+      enabled: !!pokemonSpecie,
+    }
+  );
 
   const onVariantSelect = useCallback(
     (variant: string) => {
@@ -34,8 +39,7 @@ const PokemonDetails: FunctionComponent = () => {
     [pokemonSpecie?.varieties]
   );
 
-  if (pokemonInfoResponse.isLoading || pokemonSpecieResponse.isLoading)
-    return <Spinner />;
+  if (isPokemonInfoLoading || isPokemonSpecieLoading) return <Spinner />;
 
   if (!pokemonBase || !pokemonSpecie) {
     return <Title level={3}>Pokemon not found</Title>;

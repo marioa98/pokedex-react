@@ -1,6 +1,6 @@
 import { getPokemon, getPokemonSpecie } from '@/services/pokemon';
 import type { PokemonInfo, PokemonSpecieInfo } from '@/types/pokemon';
-import { useQueries, type UseQueryResult } from '@tanstack/react-query';
+import { useQuery, type UseQueryResult } from '@tanstack/react-query';
 
 interface UsePokemonOptions {
   url?: string;
@@ -10,20 +10,24 @@ interface UsePokemonOptions {
 const usePokemon = (
   name: string,
   { url, enabled = true }: UsePokemonOptions = {}
-): [UseQueryResult<PokemonInfo>, UseQueryResult<PokemonSpecieInfo>] => {
-  const response = useQueries({
-    queries: [
-      {
-        queryKey: ['pokemon', name],
-        queryFn: () => getPokemon(url ?? `/pokemon/${name}`),
-        enabled: !!name && enabled,
-      },
-      {
-        queryKey: ['pokemon-specie', name],
-        queryFn: () => getPokemonSpecie(name),
-        enabled: !!name && enabled,
-      },
-    ],
+): UseQueryResult<PokemonInfo> => {
+  const response = useQuery({
+    queryKey: ['pokemon', name],
+    queryFn: () => getPokemon(url ?? `/pokemon/${name}`),
+    enabled: !!name && enabled,
+  });
+
+  return response;
+};
+
+export const usePokemonSpecie = (
+  name: string,
+  enabled = true
+): UseQueryResult<PokemonSpecieInfo> => {
+  const response = useQuery<PokemonSpecieInfo>({
+    queryKey: ['pokemon-specie', name],
+    queryFn: () => getPokemonSpecie(name),
+    enabled: !!name && enabled,
   });
 
   return response;
