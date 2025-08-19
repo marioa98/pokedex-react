@@ -22,7 +22,7 @@ const PokemonCard: FunctionComponent<PokemonCardProps> = ({ pokemon }) => {
   const onCardClick = useCallback(() => {
     navigate(routes.pokemonByName.replace(':pokemonName', pokemon.name));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gameNumber]);
+  }, [pokemon.name]);
 
   return (
     <Card

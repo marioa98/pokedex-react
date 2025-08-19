@@ -55,7 +55,7 @@ const usePokedex = (): UseInfiniteQueryResult<
       setTotalSpecies(species.count);
       setTotalPages(Math.ceil(species.count / DEFAULT_PAGE_SIZE));
     });
-  });
+  }, []);
 
   return response;
 };
