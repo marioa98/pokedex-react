@@ -1,0 +1,5 @@
+@use '../../styles/functions.scss' as *;
+
+.details-container {
+  margin-top: pxToVh(125px);
+}

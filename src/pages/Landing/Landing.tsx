@@ -4,7 +4,6 @@ import { Flex } from 'antd';
 import { useEffect, type FunctionComponent } from 'react';
 import PokemonCard from '@/components/PokemonCard/PokemonCard';
 import { useInView } from 'react-intersection-observer';
-import SearchBar from '@/components/SearchBar/SearchBar';
 import styles from './landing.module.scss';
 
 const Landing: FunctionComponent = () => {
@@ -19,28 +18,25 @@ const Landing: FunctionComponent = () => {
   if (isLoading) return <Spinner />;
 
   return (
-    <Flex wrap gap='large' justify='center' align='center' vertical>
-      <SearchBar />
-      <Flex
-        wrap
-        gap='large'
-        justify='center'
-        align='center'
-        className={styles['pokemon-list']}
-      >
-        {data?.pages.map(({ results }) => {
-          return (
-            <>
-              {results.map((pokemon) => {
-                const key = `pokemon-card-${pokemon.name}`;
-                return <PokemonCard key={key} pokemon={pokemon} />;
-              })}
-            </>
-          );
-        })}
-        {isFetchingNextPage && <Spinner />}
-        <div style={{ width: '100vw', height: '1vh' }} ref={ref} />
-      </Flex>
+    <Flex
+      wrap
+      gap='large'
+      justify='center'
+      align='center'
+      className={styles['pokemon-list']}
+    >
+      {data?.pages.map(({ results }) => {
+        return (
+          <>
+            {results.map((pokemon) => {
+              const key = `pokemon-card-${pokemon.name}`;
+              return <PokemonCard key={key} pokemon={pokemon} />;
+            })}
+          </>
+        );
+      })}
+      {isFetchingNextPage && <Spinner />}
+      <div style={{ width: '100vw', height: '1vh' }} ref={ref} />
     </Flex>
   );
 };

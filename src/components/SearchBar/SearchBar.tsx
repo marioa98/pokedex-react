@@ -16,7 +16,7 @@ const SearchBar: FunctionComponent = () => {
   const [options, setOptions] = useState<SelectProps['options']>([]);
   const navigate = useNavigate();
 
-  const { pokemonList } = usePokemonContext()
+  const { pokemonList } = usePokemonContext();
 
   const goToDetails = useCallback((selectedPokemon: string) => {
     navigate(routes.pokemonByName.replace(':pokemonName', selectedPokemon));

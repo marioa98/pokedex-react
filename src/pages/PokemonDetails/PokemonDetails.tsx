@@ -7,6 +7,7 @@ import type { PokemonInfo } from '@/types/pokemon';
 import { Flex, Typography } from 'antd';
 import { useCallback, useState, type FunctionComponent } from 'react';
 import { useParams } from 'react-router-dom';
+import styles from './pokemonDetails.module.scss';
 
 const { Title } = Typography;
 
@@ -48,7 +49,13 @@ const PokemonDetails: FunctionComponent = () => {
   const pokemon = pokemonVariant ?? pokemonBase;
 
   return (
-    <Flex justify='center' wrap gap='large' vertical>
+    <Flex
+      justify='center'
+      wrap
+      gap='large'
+      vertical
+      className={styles['details-container']}
+    >
       <Flex gap='small' wrap justify='center'>
         <Title style={{ textTransform: 'capitalize' }}>
           {pokemonSpecie!.name}
