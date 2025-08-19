@@ -3,13 +3,14 @@ import type { PokemonAvatarProps } from './types';
 import { useNavigate } from 'react-router-dom';
 import { Flex, Image, Typography } from 'antd';
 import { routes } from '@/routes/routes';
-import { getPokemonCardImg } from '@/utils/image';
 import PokemonTypeBadge from '../PokemonTypeBadge/PokemonTypeBadge';
 import styles from './pokemonAvatar.module.scss';
 
 const { Title } = Typography;
 
 const PokemonAvatar: FunctionComponent<PokemonAvatarProps> = ({ pokemon }) => {
+  const { name, types, sprites } = pokemon;
+
   const navigate = useNavigate();
 
   return (
@@ -21,17 +22,17 @@ const PokemonAvatar: FunctionComponent<PokemonAvatarProps> = ({ pokemon }) => {
         onClick={() => {
           navigate(routes.pokemonByName.replace(':pokemonName', pokemon.name));
         }}
-        src={getPokemonCardImg(pokemon.id)}
+        src={sprites.other['official-artwork'].front_default}
         className={styles.sprite}
       />
 
       <Flex justify='center' align='center' vertical>
         <Title className={styles.name} level={5}>
-          {pokemon.name}
+          {name}
         </Title>
         <Flex align='center' justify='center'>
-          {pokemon.types &&
-            pokemon.types.map(({ type }, typeIndex) => (
+          {types &&
+            types.map(({ type }, typeIndex) => (
               <PokemonTypeBadge
                 key={`pokemon-type-${typeIndex}`}
                 type={type.name}

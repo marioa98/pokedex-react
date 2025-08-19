@@ -65,8 +65,8 @@ const PokemonDetails: FunctionComponent = () => {
         onVariantSelect={onVariantSelect}
       />
       <PokemonEvolutionChart
-        id={pokemon!.id}
-        evolutionChainURL={pokemonSpecie!.evolution_chain.url}
+        id={pokemon.id}
+        evolutionChainURL={pokemonSpecie.evolution_chain.url}
       />
     </Flex>
   );

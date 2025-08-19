@@ -1,8 +1,8 @@
-import {
-  type PokemonInfo,
-  type PokedexResponse,
-  type PokemonSpecieInfo,
-  type PokemonChainData,
+import type {
+  PokemonInfo,
+  PokedexResponse,
+  PokemonSpecieInfo,
+  PokemonChainData,
 } from '@/types/pokemon';
 import type { RequestOptions } from '@/types/requests';
 import { getRequestOffset } from '@/utils/axios';
@@ -24,9 +24,14 @@ export const getPokedex = async ({
 };
 
 export const getPokemon = async (url: string): Promise<PokemonInfo> => {
-  const { data } = await axios.get<PokemonInfo>(url);
+  try {
+    const { data } = await axios.get<PokemonInfo>(url);
 
-  return data;
+    return data;
+  } catch (error) {
+    console.error('Error fetching Pokémon info:', error);
+    throw error;
+  }
 };
 
 export const getAllSpecies = async ({
@@ -43,10 +48,28 @@ export const getAllSpecies = async ({
 export const getPokemonSpecie = async (
   name?: string
 ): Promise<PokemonSpecieInfo> => {
-  const { data } = await axios.get<PokemonSpecieInfo>(
-    `/pokemon-species/${name}`
-  );
-  return data;
+  try {
+    const { data } = await axios.get<PokemonSpecieInfo>(
+      `/pokemon-species/${name}`
+    );
+    return data;
+  } catch (error) {
+    console.error('Error fetching Pokémon species info:', error);
+    throw error;
+  }
+};
+
+export const getPokemonFullInfo = async (
+  name: string
+): Promise<{ pokemon: PokemonInfo; pokemonSpecie: PokemonSpecieInfo }> => {
+  try {
+    const speciesData = await getPokemonSpecie(name);
+    const pokemonInfoData = await getPokemon(`/pokemon/${speciesData.id}`);
+    return { pokemon: pokemonInfoData, pokemonSpecie: speciesData };
+  } catch (error) {
+    console.error('Error fetching Pokémon full info:', error);
+    throw error;
+  }
 };
 
 export const getPokemonEvolutionChainById = async (

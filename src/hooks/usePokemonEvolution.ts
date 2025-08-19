@@ -1,8 +1,11 @@
-import { getPokemon, getPokemonEvolutionChainById } from '@/services/pokemon';
 import {
-  type PokemonChainData,
-  type PokemonEvolutionLine,
-  type PokemonInfo,
+  getPokemonEvolutionChainById,
+  getPokemonFullInfo,
+} from '@/services/pokemon';
+import type {
+  PokemonChainData,
+  PokemonEvolutionLine,
+  PokemonInfo,
 } from '@/types/pokemon';
 import { useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useState } from 'react';
@@ -34,10 +37,15 @@ const usePokemonEvolution = (
 
       if (Array.isArray(data)) {
         currentPokemonData = await Promise.all(
-          data.map((pokemon) => getPokemon(pokemon.species.url))
+          data.map((pokemon) =>
+            getPokemonFullInfo(pokemon.species.name).then(
+              ({ pokemon: pokemonInfo }) => pokemonInfo
+            )
+          )
         );
       } else {
-        currentPokemonData = await getPokemon(data.species.url);
+        const { pokemon } = await getPokemonFullInfo(data.species.name);
+        currentPokemonData = pokemon;
       }
 
       const evolutionChain: EvolutionChain = [
