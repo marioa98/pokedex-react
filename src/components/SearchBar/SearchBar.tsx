@@ -6,7 +6,7 @@ import {
   type FunctionComponent,
 } from 'react';
 import styles from './searchBar.module.scss';
-import { routes } from '@/routes/routes';
+import { goToDetailsPath } from '@/routes/routes';
 import { useNavigate } from 'react-router-dom';
 import { usePokemonContext } from '@/context/PokemonContext/PokemonContext';
 
@@ -19,7 +19,9 @@ const SearchBar: FunctionComponent = () => {
   const { pokemonList } = usePokemonContext();
 
   const goToDetails = useCallback((selectedPokemon: string) => {
-    navigate(routes.pokemonByName.replace(':pokemonName', selectedPokemon));
+    navigate(goToDetailsPath(selectedPokemon), {
+      replace: true,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
