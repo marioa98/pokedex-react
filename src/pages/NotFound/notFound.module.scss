@@ -1,0 +1,26 @@
+@use '../../styles/variables.scss' as *;
+
+.not-found-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.home-button {
+  &:global(.ant-btn-lg) {
+    height: 50px;
+
+    // &:hover {
+    //   background-color: $button-primary-hover;
+    //   border-color: $button-primary-hover;
+    //   color: $color-white;
+    // }
+
+    @media (max-width: $desktop-breakpoint) and (min-width: $mobile-breakpoint) {
+      height: 40px;
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+      height: 30px;
+    }
+  }
+}
