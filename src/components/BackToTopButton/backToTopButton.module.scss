@@ -1,0 +1,44 @@
+@use '../../styles/functions.scss' as *;
+@use '../../styles/variables.scss' as *;
+
+$button-alignment: pxToVh(30px);
+
+.back-to-top-button {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:global(.ant-btn-lg.ant-btn-icon-only) {
+    height: 80px;
+    width: 80px;
+    bottom: 48px;
+    right: 48px;
+
+    @media (max-width: $desktop-breakpoint) and (min-width: $mobile-breakpoint) {
+      height: 70px;
+      width: 70px;
+      bottom: 36px;
+      right: 36px;
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+      height: 60px;
+      width: 60px;
+      bottom: 24px;
+      right: 24px;
+    }
+  }
+
+  &:hover {
+    border-color: transparent;
+  }
+
+  .arrow {
+    svg {
+      width: 1.25em;
+      height: 1.25em;
+    }
+  }
+}

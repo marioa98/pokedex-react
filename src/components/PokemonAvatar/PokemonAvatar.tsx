@@ -2,7 +2,7 @@ import type { FunctionComponent } from 'react';
 import type { PokemonAvatarProps } from './types';
 import { useNavigate } from 'react-router-dom';
 import { Flex, Image, Typography } from 'antd';
-import { routes } from '@/routes/routes';
+import { goToDetailsPath } from '@/routes/routes';
 import PokemonTypeBadge from '../PokemonTypeBadge/PokemonTypeBadge';
 import styles from './pokemonAvatar.module.scss';
 
@@ -20,7 +20,9 @@ const PokemonAvatar: FunctionComponent<PokemonAvatarProps> = ({ pokemon }) => {
         height={150}
         preview={false}
         onClick={() => {
-          navigate(routes.pokemonByName.replace(':pokemonName', pokemon.name));
+          navigate(goToDetailsPath(pokemon.name), {
+            replace: true,
+          });
         }}
         src={sprites.other['official-artwork'].front_default}
         className={styles.sprite}

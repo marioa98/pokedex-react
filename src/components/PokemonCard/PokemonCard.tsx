@@ -4,7 +4,7 @@ import { Card, Flex, Typography } from 'antd';
 import styles from './pokemonCard.module.scss';
 import usePokemon from '@/hooks/usePokemon';
 import { useNavigate } from 'react-router-dom';
-import { routes } from '@/routes/routes';
+import { goToDetailsPath } from '@/routes/routes';
 import PokemonTypeBadge from '../PokemonTypeBadge/PokemonTypeBadge';
 
 const { Title } = Typography;
@@ -20,7 +20,7 @@ const PokemonCard: FunctionComponent<PokemonCardProps> = ({ pokemon }) => {
   const formatNumber = String(gameNumber).padStart(4, '0');
 
   const onCardClick = useCallback(() => {
-    navigate(routes.pokemonByName.replace(':pokemonName', pokemon.name));
+    navigate(goToDetailsPath(pokemon.name));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokemon.name]);
 

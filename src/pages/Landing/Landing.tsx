@@ -5,6 +5,7 @@ import { useEffect, type FunctionComponent } from 'react';
 import PokemonCard from '@/components/PokemonCard/PokemonCard';
 import { useInView } from 'react-intersection-observer';
 import styles from './landing.module.scss';
+import BackToTopButton from '@/components/BackToTopButton/BackToTopButton';
 
 const Landing: FunctionComponent = () => {
   const { ref, inView } = useInView();
@@ -35,6 +36,7 @@ const Landing: FunctionComponent = () => {
           </>
         );
       })}
+      <BackToTopButton />
       {isFetchingNextPage && <Spinner />}
       <div style={{ width: '100vw', height: '1vh' }} ref={ref} />
     </Flex>
