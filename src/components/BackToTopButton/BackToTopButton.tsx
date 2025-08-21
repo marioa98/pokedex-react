@@ -31,7 +31,7 @@ const BackToTopButton: FunctionComponent<BackToTopButtonProps> = ({
         className={styles['back-to-top-button']}
         icon={<UpOutlined className={styles.arrow} />}
         size='large'
-        type="primary"
+        type='primary'
         onClick={scrollToTop}
       />
     )
