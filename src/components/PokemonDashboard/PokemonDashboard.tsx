@@ -10,6 +10,7 @@ import {
   getWeightFormat,
 } from '@/utils/pokemon';
 import styles from './pokemonDashboard.module.scss';
+import usePokemonWeakness from '@/hooks/usePokemonWeaknesses';
 
 const formatPokemonVariantName = (name: string): string => {
   return name.replace('-', ' ').replace(/\b\w/g, (char) => char.toUpperCase());
@@ -21,8 +22,9 @@ const PokemonDashboard: FunctionComponent<PokemonDashboardProps> = ({
   onVariantSelect,
 }) => {
   const { abilities, height, name, types, weight, sprites } = pokemonInfo;
-
   const { varieties, flavor_text_entries, genera } = pokemonSpecie;
+
+  const weaknesses = usePokemonWeakness(types);
 
   return (
     <Flex align='center' justify='center' wrap gap='large'>
@@ -66,14 +68,23 @@ const PokemonDashboard: FunctionComponent<PokemonDashboardProps> = ({
             {getLocalizedDescription(flavor_text_entries)}
           </Descriptions.Item>
 
-          <Descriptions.Item label='Types' span={6}>
-            {types.map((type, typeIndex) => (
+          <Descriptions.Item label='Types' span={3}>
+            {types.map(({ type: { name: typeName } },) => (
               <PokemonTypeBadge
-                key={`${name}-type-${typeIndex}`}
-                type={type.type.name}
+                key={`${name}-type-${typeName}`}
+                type={typeName}
               />
             ))}
           </Descriptions.Item>
+          <Descriptions.Item label='Weaknesses' span={3}>
+            {weaknesses.map((weakness) => (
+              <PokemonTypeBadge
+                key={`${name}-weakness-${weakness}`}
+                type={weakness}
+              />
+            ))}
+          </Descriptions.Item>
+
           <Descriptions.Item
             label='Abilities'
             style={{ textTransform: 'capitalize' }}
