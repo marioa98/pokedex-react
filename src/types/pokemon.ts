@@ -3,6 +3,42 @@ export interface PokemonExternalResource {
   url: string;
 }
 
+export interface PokemonTypeObject {
+  damage_relations: {
+    double_damage_from: PokemonExternalResource[];
+    double_damage_to: PokemonExternalResource[];
+    half_damage_from: PokemonExternalResource[];
+    half_damage_to: PokemonExternalResource[];
+    no_damage_from: PokemonExternalResource[];
+    no_damage_to: PokemonExternalResource[];
+  };
+  game_indices: {
+    game_index: number;
+    generation: PokemonExternalResource;
+  }[];
+  generation: PokemonExternalResource;
+  id: number;
+  move_damage_class: PokemonExternalResource;
+  moves: PokemonExternalResource[];
+  name: string;
+  names: {
+    language: PokemonExternalResource;
+    name: string;
+  }[];
+  past_damage_relations: unknown[];
+  pokemon: {
+    pokemon: PokemonExternalResource;
+    slot: number;
+  }[];
+  sprites: {
+    [generation: string]: {
+      [key: string]: {
+        name_icon: string;
+      };
+    };
+  };
+}
+
 export interface PokedexResponse {
   count: number;
   next: null | string;
