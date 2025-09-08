@@ -32,7 +32,7 @@ const PokemonDashboard: FunctionComponent<PokemonDashboardProps> = ({
 
   const onShinyToggle = (checked: boolean) => {
     setIsShiny(checked);
-  }
+  };
 
   useEffect(() => {
     const spritesList = sprites.other['official-artwork'];
@@ -85,7 +85,7 @@ const PokemonDashboard: FunctionComponent<PokemonDashboardProps> = ({
           </Descriptions.Item>
 
           <Descriptions.Item label='Types' span={3}>
-            {types.map(({ type: { name: typeName } },) => (
+            {types.map(({ type: { name: typeName } }) => (
               <PokemonTypeBadge
                 key={`${name}-type-${typeName}`}
                 type={typeName}
@@ -124,10 +124,7 @@ const PokemonDashboard: FunctionComponent<PokemonDashboardProps> = ({
             {getAbilitiesFormatted(abilities)}
           </Descriptions.Item>
 
-          <Descriptions.Item
-            label='Shiny'
-            span={1}
-          >
+          <Descriptions.Item label='Shiny' span={1}>
             <Switch onChange={onShinyToggle} />
           </Descriptions.Item>
         </Descriptions>

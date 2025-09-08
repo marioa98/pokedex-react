@@ -13,19 +13,25 @@ const usePokemonWeakness = (types: PokemonTypeInfo[]) => {
     combine: (results) => {
       return results.map(({ data }) => {
         if (!data) return;
-        const { damage_relations: { double_damage_from } } = data
+        const {
+          damage_relations: { double_damage_from },
+        } = data;
 
         return double_damage_from.map(({ name }) => name);
-      })
+      });
     },
   });
 
   useEffect(() => {
-    const weaknesses = results.flat().filter((name, _, currentArray) => currentArray.includes(name) && name) as PokemonType[];
+    const weaknesses = results
+      .flat()
+      .filter(
+        (name, _, currentArray) => currentArray.includes(name) && name
+      ) as PokemonType[];
     setWeaknesses(weaknesses);
   }, [results]);
 
-  return weaknesses
+  return weaknesses;
 };
 
 export default usePokemonWeakness;

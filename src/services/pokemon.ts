@@ -92,7 +92,9 @@ export const getPokemonEvolutionChainById = async (
   return data;
 };
 
-export const getPokemonType = async (url: string): Promise<PokemonTypeObject> => {
+export const getPokemonType = async (
+  url: string
+): Promise<PokemonTypeObject> => {
   try {
     const { data } = await getAbstractPokemonUrl(url);
 

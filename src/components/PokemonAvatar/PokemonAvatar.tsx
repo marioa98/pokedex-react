@@ -9,7 +9,11 @@ import styles from './pokemonAvatar.module.scss';
 const { Title } = Typography;
 
 const PokemonAvatar: FunctionComponent<PokemonAvatarProps> = ({ pokemon }) => {
-  const { species: { name }, types, sprites } = pokemon;
+  const {
+    species: { name },
+    types,
+    sprites,
+  } = pokemon;
 
   const navigate = useNavigate();
 
