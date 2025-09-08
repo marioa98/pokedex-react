@@ -7,7 +7,7 @@ import {
 } from 'react';
 import styles from './searchBar.module.scss';
 import { goToDetailsPath } from '@/routes/routes';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { usePokemonContext } from '@/context/PokemonContext/PokemonContext';
 
 const { Text } = Typography;

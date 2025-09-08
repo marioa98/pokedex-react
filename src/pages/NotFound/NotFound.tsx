@@ -2,7 +2,7 @@ import { Button, Flex, Image, Typography } from 'antd';
 import type { FunctionComponent } from 'react';
 import angryPikachu from '@/assets/angryPikachu.jpeg';
 import styles from './notFound.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { routes } from '@/routes/routes';
 
 const { Title } = Typography;

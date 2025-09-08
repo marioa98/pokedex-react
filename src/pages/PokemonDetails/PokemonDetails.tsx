@@ -6,7 +6,7 @@ import { getPokemon } from '@/services/pokemon';
 import type { PokemonInfo } from '@/types/pokemon';
 import { Flex, Typography } from 'antd';
 import { useCallback, useState, type FunctionComponent } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import styles from './pokemonDetails.module.scss';
 
 const { Title } = Typography;

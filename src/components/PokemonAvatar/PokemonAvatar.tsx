@@ -1,6 +1,6 @@
 import type { FunctionComponent } from 'react';
 import type { PokemonAvatarProps } from './types';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Flex, Image, Typography } from 'antd';
 import { goToDetailsPath } from '@/routes/routes';
 import PokemonTypeBadge from '../PokemonTypeBadge/PokemonTypeBadge';
