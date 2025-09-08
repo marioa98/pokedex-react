@@ -5,7 +5,12 @@ import usePokemon, { usePokemonSpecie } from '@/hooks/usePokemon';
 import { getPokemon } from '@/services/pokemon';
 import type { PokemonInfo } from '@/types/pokemon';
 import { Flex, Typography } from 'antd';
-import { useCallback, useEffect, useState, type FunctionComponent } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type FunctionComponent,
+} from 'react';
 import { useParams } from 'react-router';
 import styles from './pokemonDetails.module.scss';
 

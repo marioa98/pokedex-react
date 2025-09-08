@@ -31,7 +31,7 @@ const NotFound: FunctionComponent = () => {
         type='primary'
         className={styles['home-button']}
         onClick={() => {
-          navigate(routes.root)
+          navigate(routes.root);
         }}
       >
         Go Home
