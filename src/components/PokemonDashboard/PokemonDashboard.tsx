@@ -66,7 +66,7 @@ const PokemonDashboard: FunctionComponent<PokemonDashboardProps> = ({
             {getLocalizedDescription(flavor_text_entries)}
           </Descriptions.Item>
 
-          <Descriptions.Item label='Types' span={2}>
+          <Descriptions.Item label='Types' span={6}>
             {types.map((type, typeIndex) => (
               <PokemonTypeBadge
                 key={`${name}-type-${typeIndex}`}
@@ -77,14 +77,14 @@ const PokemonDashboard: FunctionComponent<PokemonDashboardProps> = ({
           <Descriptions.Item
             label='Abilities'
             style={{ textTransform: 'capitalize' }}
-            span={2}
+            span={3}
           >
             {getAbilitiesFormatted(abilities)}
           </Descriptions.Item>
           <Descriptions.Item
             label='Genus'
             style={{ textTransform: 'capitalize' }}
-            span={2}
+            span={3}
           >
             {getLocalizedGenus(genera)}
           </Descriptions.Item>
