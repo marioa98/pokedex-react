@@ -1,4 +1,3 @@
-import { Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing/Landing';
 import { routes } from './routes/routes';
 import PokemonDetails from './pages/PokemonDetails/PokemonDetails';
@@ -6,6 +5,7 @@ import PokemonContextProvider from './context/PokemonContext/PokemonContext';
 import { Flex } from 'antd';
 import SearchBar from './components/SearchBar/SearchBar';
 import NotFound from './pages/NotFound/NotFound';
+import { Route, Routes } from 'react-router';
 
 function App() {
   return (

@@ -3,10 +3,11 @@ import type {
   PokedexResponse,
   PokemonSpecieInfo,
   PokemonChainData,
+  PokemonTypeObject,
 } from '@/types/pokemon';
 import type { RequestOptions } from '@/types/requests';
 import { getRequestOffset } from '@/utils/axios';
-import axios, { type AxiosRequestConfig } from 'axios';
+import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
 
 export const DEFAULT_PAGE_SIZE = 20;
 
@@ -23,11 +24,17 @@ export const getPokedex = async ({
   return data;
 };
 
+export const getAbstractPokemonUrl = async (
+  url: string
+): Promise<AxiosResponse<unknown>> => {
+  return axios.get(url);
+};
+
 export const getPokemon = async (url: string): Promise<PokemonInfo> => {
   try {
-    const { data } = await axios.get<PokemonInfo>(url);
+    const { data } = await getAbstractPokemonUrl(url);
 
-    return data;
+    return data as PokemonInfo;
   } catch (error) {
     console.error('Error fetching Pokémon info:', error);
     throw error;
@@ -83,4 +90,17 @@ export const getPokemonEvolutionChainById = async (
   );
 
   return data;
+};
+
+export const getPokemonType = async (
+  url: string
+): Promise<PokemonTypeObject> => {
+  try {
+    const { data } = await getAbstractPokemonUrl(url);
+
+    return data as PokemonTypeObject;
+  } catch (error) {
+    console.error('Error fetching Pokémon type:', error);
+    throw error;
+  }
 };

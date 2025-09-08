@@ -5,8 +5,13 @@ import usePokemon, { usePokemonSpecie } from '@/hooks/usePokemon';
 import { getPokemon } from '@/services/pokemon';
 import type { PokemonInfo } from '@/types/pokemon';
 import { Flex, Typography } from 'antd';
-import { useCallback, useState, type FunctionComponent } from 'react';
-import { useParams } from 'react-router-dom';
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type FunctionComponent,
+} from 'react';
+import { useParams } from 'react-router';
 import styles from './pokemonDetails.module.scss';
 
 const { Title } = Typography;
@@ -24,6 +29,10 @@ const PokemonDetails: FunctionComponent = () => {
       enabled: !!pokemonSpecie,
     }
   );
+
+  useEffect(() => {
+    setPokemonVariant(undefined);
+  }, [pokemonName]);
 
   const onVariantSelect = useCallback(
     (variant: string) => {

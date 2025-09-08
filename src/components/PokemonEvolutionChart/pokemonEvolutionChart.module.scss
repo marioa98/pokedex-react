@@ -3,13 +3,13 @@
 
 .evolution-showcase {
   min-height: pxToVh(400px);
-  min-width: 65%;
+  width: 85%;
   background-color: $color-black-800;
   border-radius: pxToVw(24px);
   padding: 24px;
 
-  @media (max-width: $desktop-breakpoint) {
-    width: 85%;
+  @media (max-width: $mobile-breakpoint) {
+    width: 77%;
   }
 
   .evolution-link {
