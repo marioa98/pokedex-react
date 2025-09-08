@@ -1,6 +1,6 @@
-import type { FunctionComponent } from 'react';
+import { useEffect, useState, type FunctionComponent } from 'react';
 import type { PokemonDashboardProps } from './types';
-import { Descriptions, Flex, Image, Select } from 'antd';
+import { Descriptions, Flex, Image, Select, Switch } from 'antd';
 import PokemonTypeBadge from '../PokemonTypeBadge/PokemonTypeBadge';
 import {
   getAbilitiesFormatted,
@@ -21,16 +21,32 @@ const PokemonDashboard: FunctionComponent<PokemonDashboardProps> = ({
   pokemonSpecie,
   onVariantSelect,
 }) => {
+  const [isShiny, setIsShiny] = useState<boolean>(false);
+  const [spriteSrc, setSpriteSrc] = useState<string>(
+    pokemonInfo.sprites.other['official-artwork'].front_default
+  );
   const { abilities, height, name, types, weight, sprites } = pokemonInfo;
   const { varieties, flavor_text_entries, genera } = pokemonSpecie;
 
   const weaknesses = usePokemonWeakness(types);
 
+  const onShinyToggle = (checked: boolean) => {
+    setIsShiny(checked);
+  }
+
+  useEffect(() => {
+    const spritesList = sprites.other['official-artwork'];
+    setSpriteSrc(() => {
+      if (isShiny && spritesList.front_shiny) return spritesList.front_shiny;
+      return spritesList.front_default;
+    });
+  }, [isShiny, sprites]);
+
   return (
     <Flex align='center' justify='center' wrap gap='large'>
       <Image
         alt={name}
-        src={sprites.other['official-artwork'].front_default}
+        src={spriteSrc}
         preview={false}
         className={styles.sprite}
       />
@@ -86,25 +102,33 @@ const PokemonDashboard: FunctionComponent<PokemonDashboardProps> = ({
           </Descriptions.Item>
 
           <Descriptions.Item
-            label='Abilities'
-            style={{ textTransform: 'capitalize' }}
-            span={3}
-          >
-            {getAbilitiesFormatted(abilities)}
-          </Descriptions.Item>
-          <Descriptions.Item
             label='Genus'
             style={{ textTransform: 'capitalize' }}
-            span={3}
+            span={2}
           >
             {getLocalizedGenus(genera)}
           </Descriptions.Item>
 
-          <Descriptions.Item label='Height' span={3}>
+          <Descriptions.Item label='Height' span={2}>
             {getHeightFormat(height)}
           </Descriptions.Item>
-          <Descriptions.Item label='Weight' span={3}>
+          <Descriptions.Item label='Weight' span={2}>
             {getWeightFormat(weight)}
+          </Descriptions.Item>
+
+          <Descriptions.Item
+            label='Abilities'
+            style={{ textTransform: 'capitalize' }}
+            span={5}
+          >
+            {getAbilitiesFormatted(abilities)}
+          </Descriptions.Item>
+
+          <Descriptions.Item
+            label='Shiny'
+            span={1}
+          >
+            <Switch onChange={onShinyToggle} />
           </Descriptions.Item>
         </Descriptions>
       </Flex>
